@@ -11,6 +11,9 @@ gulp.task('buildCss', function(){
     return gulp.src('./src/scss/**/*.scss')
         .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
         .pipe(gulp.dest('./build/arquivos'))
+        .pipe(browserSync.reload({
+            stream: true
+        }))
 });
 
 gulp.task('buildJs', function(){
@@ -21,15 +24,8 @@ gulp.task('buildJs', function(){
 
 gulp.task('browser-sync', function() {
     browserSync.init({
-        dev: {
-            bsFiles: {
-                src:'build/arquivos/*.css'
-            }
-        },
-
-        option: {
-            proxy: 'pandorajoias.vtexlocal.com.br',
-            watchTask: true
+        server: {
+            baseDir: 'build'
         }
     });
 });
@@ -45,17 +41,18 @@ gulp.task('cleanBuild', function () {
         .pipe(clean());
 });
 
-gulp.task('copyCss', function () {
-    gulp.src('./src/css/**/*.css')
-        .pipe(gulp.dest('./build/arquivos/'));
-});
-
-gulp.task('watch', function(){
+gulp.task('watch', ['browser-sync', 'buildCss'], function(){
     gulp.watch('./src/scss/**/*.scss', ['buildCss']);
     gulp.watch('./src/js/**/*.js', ['jsHints']);
     gulp.watch('./src/js/**/*.js', ['buildJs']);
+    gulp.watch('./src/*.html', browserSync.reload); 
 });
 
-gulp.task('default', ['cleanBuild','buildCss','jsHints','buildJs','copyCss','browser-sync','watch'], function(){
+gulp.task('html', function() {
+    return gulp.src('./src/*.html')
+    .pipe(gulp.dest('./build/'))
+})
+
+gulp.task('default', ['cleanBuild','html','buildCss','jsHints','buildJs','browser-sync','watch'], function(){
     console.log('Começando...');
 });
