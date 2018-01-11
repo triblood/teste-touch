@@ -53,6 +53,11 @@ gulp.task('html', function() {
     .pipe(gulp.dest('./build/'))
 })
 
-gulp.task('default', ['cleanBuild','html','buildCss','jsHints','buildJs','browser-sync','watch'], function(){
+gulp.task('img', function() {
+    return gulp.src('./src/image/*.png')
+    .pipe(gulp.dest('./build/arquivos/'))
+})
+
+gulp.task('default', ['cleanBuild','html','img','buildCss','jsHints','buildJs','browser-sync','watch'], function(){
     console.log('Começando...');
 });
