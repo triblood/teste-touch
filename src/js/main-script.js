@@ -46,6 +46,39 @@ $('.main-img')
 
 
     //frete
+    var sendjson = {   
+        "nCdEmpresa":"",
+        "sDsSenha":"",
+        "nCdServico":"41106",
+        "sCepOrigem":"37540000",
+        "sCepDestino":"37540000",
+        "nVlPeso":"1",
+        "nCdFormato":"1",
+        "nVlComprimento":"20",
+        "nVlAltura":"5",
+        "nVlLargura":"15",
+        "nVlDiametro":"0",
+        "sCdMaoPropria":"s",
+        "nVlValorDeclarado":"200",
+        "sCdAvisoRecebimento":"s"
+    }
     
+    $.ajax({
+        type: "GET",
+        crossDomain: true,
+        contentType: "application/json; charset=utf-8",
+        url: "http://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx/CalcPrecoPrazo",
+        headers: {  
+            "Accept": "application/json"
+        },
+        xhrFields: {
+            withCredentials: true
+        },
+        data: sendjson,
+        dataType: "jsonp",
+        success: function(data, textStatus, request){
+            console.log(data);
+        }
+    });
     // 
 });
