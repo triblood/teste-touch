@@ -32,4 +32,13 @@ $('.main-img')
         $('.zoom img').css('left', '-' +Xpos+ 'px');
     });
     // 
+
+    $('.img .thumbs li').click(function(){
+        $('.img .thumbs li').removeClass('ativo');
+        $(this).addClass('ativo');
+
+        var thumbSrc = $(this).find('img').attr('src');
+        $('.main-img > img').attr('src',thumbSrc);
+        $('.main-img > .zoom').remove();
+    });
 });
