@@ -97,9 +97,29 @@ main {
 
     .img{
         .main-img{
+            position: relative;
             img {
                 width: 100%;
                 height: auto;
+            }
+
+            .zoom{
+                display: none;
+                width: 350px;
+                height: 350px;
+                overflow: hidden;
+                position: absolute;
+                left: 100%;
+                top: 0;
+                z-index: 10;
+                background-color: #fff;
+                border: 1px solid #d3d3d3;
+                
+                img{
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                }
             }
         }
 
@@ -113,6 +133,7 @@ main {
             li{
                 float: left;
                 list-style-type: none;
+                cursor: pointer;
 
                 &:not(:last-child){
                     margin-right: 20px;
