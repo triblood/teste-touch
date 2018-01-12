@@ -33,6 +33,7 @@ $('.main-img')
     });
     // 
 
+    //foto change
     $('.img .thumbs li').click(function(){
         $('.img .thumbs li').removeClass('ativo');
         $(this).addClass('ativo');
@@ -41,4 +42,10 @@ $('.main-img')
         $('.main-img > img').attr('src',thumbSrc);
         $('.main-img > .zoom').remove();
     });
+    //
+
+
+    //frete
+    
+    // 
 });
